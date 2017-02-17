@@ -30,6 +30,9 @@ function coEval(cmd, context, filename, callback) {
   } catch (e) {
     ___CALLBACK___ = callback
     // Wrap with co
+    if (cmd.startsWith('*')) {
+      cmd = cmd.slice(1, cmd.length)
+    }
     var cmdToRun = '___CO___(function*(){___CALLBACK___(null, yield function *() {' + cmd + '}())})()';
     var script = vm.createScript(cmdToRun);
     script.runInThisContext(context);
