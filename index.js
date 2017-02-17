@@ -33,7 +33,7 @@ function coEval(cmd, context, filename, callback) {
     if (cmd.startsWith('*')) {
       cmd = cmd.slice(1, cmd.length)
     }
-    var cmdToRun = '___CO___(function*(){___CALLBACK___(null, yield function *() {' + cmd + '}())})()';
+    var cmdToRun = '___CO___(function*(){___CALLBACK___(null, yield function *() { return (' + cmd + ') }())})()';
     var script = vm.createScript(cmdToRun);
     script.runInThisContext(context);
   }
